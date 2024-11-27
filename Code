@@ -1,0 +1,119 @@
+Code for Figure 1:
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the function
+def func(z):
+modulus = np.abs(z)
+argument = np.angle(z)
+return np.sqrt(np.log(modulus)**2 + argument**2)
+
+# Generate a grid of complex numbers
+real_vals = np.linspace(-2, 2, 400)
+imag_vals = np.linspace(-2, 2, 400)
+real, imag = np.meshgrid(real_vals, imag_vals)
+z = real + 1j * imag
+
+# Apply the function on the complex grid
+result = func(z)
+
+# Plot the result
+# Plot with contour lines labeled
+plt.figure(figsize=(8, 6))
+contour = plt.contour(real, imag, result, levels=10, cmap="inferno")
+plt.clabel(contour, fmt="%.2f", colors="white", fontsize=10) # Add labels for contour lines
+plt.colorbar(contour, label=r"$\sqrt{\ln(|z|)^2 + \arg(z)^2}$")
+plt.title(r"Plot of $\sqrt{\ln(|z|)^2 + \arg(z)^2}$ with Labeled Contours")
+plt.xlabel("Re(z)")
+plt.ylabel("Im(z)")
+plt.show()
+
+Code for Figure 2:
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function definition
+def f(z):
+modulus = np.abs(z)
+argz = np.angle(z)
+return np.sqrt(np.log(modulus)**2 + argz**2)
+
+# Function to plot each graph separately
+def plot_single(x_data, y_data, xlabel, ylabel, title):
+plt.figure(figsize=(7, 5))
+plt.plot(x_data, y_data, label=title)
+plt.title(title)
+plt.xlabel(xlabel)
+plt.ylabel(ylabel)
+plt.grid(True)
+plt.legend()
+plt.show()
+
+Code for Figures 2-7:
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# Define the function to compute values
+def func(z):
+modulus = np.abs(z)
+argument = np.angle(z)
+return np.sqrt(np.log(modulus) ** 2 + argument ** 2)
+
+
+# Define a helper function to plot the function along specific ranges
+def plot_function_along_range(x_vals, y_vals, title, xlabel, ylabel):
+z = x_vals + 1j * y_vals
+f_vals = func(z)
+
+plt.figure(figsize=(8, 4))
+plt.plot(x_vals, f_vals, label=r"$\sqrt{\ln(|z|)^2 + \arg(z)^2}$", color="blue")
+plt.title(title)
+plt.xlabel(xlabel)
+plt.ylabel(ylabel)
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend()
+plt.show()
+
+# Real Axis (general): Both positive and negative real numbers
+x_vals_real_axis = np.linspace(-3, 3, 400)
+y_vals_real_axis = np.zeros_like(x_vals_real_axis)
+plot_function_along_range(
+x_vals_real_axis,
+y_vals_real_axis,
+title="Function Along Real Axis (-3 < x < 3)",
+xlabel="Re(z) (x)",
+ylabel="f(x)"
+)
+
+# 1. Radial Path (θ = π/4)
+r = np.linspace(0.1, 10, 500)
+z_radial = r * np.exp(1j * np.pi / 4)
+f_radial = f(z_radial)
+plot_single(r, f_radial, 'r', r'$f(z)$', 'Radial Path (θ = π/4)')
+
+# 2. Circular Path (r = 2)
+theta = np.linspace(-np.pi, np.pi, 500)
+z_circular = 2 * np.exp(1j * theta)
+f_circular = f(z_circular)
+plot_single(theta, f_circular, r'$\theta$', r'$f(z)$', 'Circular Path (r = 2)')
+
+# 3. Lines Parallel to the Real Axis (y = 2)
+x_real = np.linspace(-10, 10, 500)
+z_real = x_real + 2j
+f_real = f(z_real)
+plot_single(x_real, f_real, 'x', r'$f(z)$', 'Real Axis Path (y = 2)')
+
+# 4. Lines Parallel to the Imaginary Axis (x = 2)
+y_imag = np.linspace(-10, 10, 500)
+z_imag = 2 + 1j * y_imag
+f_imag = f(z_imag)
+plot_single(y_imag, f_imag, 'y', r'$f(z)$', 'Imaginary Axis Path (x = 2)')
+
+# 5. Logarithmic Spiral Path
+r_spiral = np.linspace(0.1, 10, 500)
+z_spiral = r_spiral * np.exp(1j * np.log(r_spiral))
+f_spiral = f(z_spiral)
+plot_single(r_spiral, f_spiral, 'r', r'$f(z)$', 'Logarithmic Spiral Path')
+
+
