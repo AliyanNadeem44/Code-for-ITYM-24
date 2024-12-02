@@ -109,11 +109,3 @@ y_imag = np.linspace(-10, 10, 500)
 z_imag = 2 + 1j * y_imag
 f_imag = f(z_imag)
 plot_single(y_imag, f_imag, 'y', r'$f(z)$', 'Imaginary Axis Path (x = 2)')
-
-# 5. Logarithmic Spiral Path
-r_spiral = np.linspace(0.1, 10, 500)
-z_spiral = r_spiral * np.exp(1j * np.log(r_spiral))
-f_spiral = f(z_spiral)
-plot_single(r_spiral, f_spiral, 'r', r'$f(z)$', 'Logarithmic Spiral Path')
-
-
